@@ -2,24 +2,31 @@
 #include <stack>
 #include <queue>
 #include <list>
+#include <stdio.h>
+#include <stdlib.h>
+#include <vector>
 
 using namespace std;
 
-struct aluno{
+struct aluno
+{
     string nome;
     int idade;
     string materia;
 
-    void falar(string fala){
+    void falar(string fala)
+    {
         cout << fala + "\n";
     }
 };
 
-void log(string texto){
+void log(string texto)
+{
     cout << texto;
 }
 
-float calcularMedia(int notas[3]){
+float calcularMedia(int notas[3])
+{
     float soma = 0;
     for (int i = 0; i < 3; i++)
     {
@@ -27,23 +34,46 @@ float calcularMedia(int notas[3]){
     }
     return soma / 3;
 }
-int fatorial(int n){
+int fatorial(int n)
+{
     if (n == 0)
     {
         return 1;
     }
     return n * fatorial(n - 1);
 }
-void popularLista(list<string> &acoes){
+void popularLista(list<string> &acoes)
+{
     acoes.push_front("Estudar");
     acoes.push_back("Jogar");
-
 }
 
-int main (int argc, char *argv[]) {
+void somar(float *var, float valor)
+{
+    *var += valor;
+}
 
-    //Funcoes
-    int notas[3] = {0,0,0};
+void iniVetor(float *v)
+{
+    v[0] = 1;
+    v[1] = 2;
+    v[2] = 3;
+    v[3] = 4;
+    v[4] = 5;
+}
+void printVetor(float *v)
+{
+    for (int i = 0; i < 5; i++)
+    {
+        cout << "\n"
+             << v[i] << "\n";
+    }
+}
+int main(int argc, char *argv[])
+{
+
+    // Funcoes
+    int notas[3] = {0, 0, 0};
     float media = 0;
 
     for (int i = 0; i < 3; i++)
@@ -51,30 +81,35 @@ int main (int argc, char *argv[]) {
         log("Digite sua nota " + to_string(i + 1) + ": \n");
         cin >> notas[i];
     }
-    
 
     media = calcularMedia(notas);
 
     log("Sua média de nota é: " + to_string(media) + "\n");
 
-    //Recursividade
+    // Recursividade
     int res = fatorial(4);
     log("Fatorial de 4 com recursividade: " + to_string(res) + "\n");
 
-    //Enums
-    enum area {Tecnologia, Engenharia, Advocacia};
+    // Enums
+    enum area
+    {
+        Tecnologia,
+        Engenharia,
+        Advocacia
+    };
 
     area areaSelecionada = Tecnologia;
 
     log(to_string(areaSelecionada) + "\n");
 
-    //Pilha/Stack
+    // Pilha/Stack
     stack<string> proffisoes;
 
     proffisoes.push("Engenharia");
     proffisoes.push("Advocacia");
     proffisoes.push("Tecnologia");
-    if(!proffisoes.empty()){
+    if (!proffisoes.empty())
+    {
         int sizeStack = proffisoes.size();
         for (int i = 0; i < sizeStack; i++)
         {
@@ -83,28 +118,28 @@ int main (int argc, char *argv[]) {
             proffisoes.pop();
             log("Retirado...\n");
         }
-        
     }
 
-    //Fila/Queue
+    // Fila/Queue
     queue<string> tarefas;
 
     tarefas.push("Passear com cachorro");
     tarefas.push("Tomar banho");
-    tarefas.push("Alimentar");  
+    tarefas.push("Alimentar");
 
     log("Primeira tarefa: " + tarefas.front() + "\n");
     log("-------------------------------------------\n");
     log("Ultima tarefa: " + tarefas.back() + "\n");
-    while(!tarefas.empty()){
+    while (!tarefas.empty())
+    {
         log(tarefas.front() + "\n");
         log("Concluído! \n");
         tarefas.pop();
     }
 
-    //Lista
+    // Lista
     list<string> acoes;
-  
+
     popularLista(acoes);
 
     int listSize = acoes.size();
@@ -117,7 +152,7 @@ int main (int argc, char *argv[]) {
         acoes.pop_front();
         log("Retirado\n");
     }
-    
+
     popularLista(acoes);
     listSize = acoes.size();
     acoes.reverse();
@@ -129,7 +164,7 @@ int main (int argc, char *argv[]) {
         acoes.pop_back();
         log("Retirado\n");
     }
-    
+
     list<string>::iterator it;
 
     popularLista(acoes);
@@ -143,12 +178,14 @@ int main (int argc, char *argv[]) {
 
     for (int i = 0; i < listSize; i++)
     {
-        if(i == 1){
+        if (i == 1)
+        {
             log(acoes.front() + "\n");
             acoes.pop_front();
         }
-        else{
-            acoes.pop_front();  
+        else
+        {
+            acoes.pop_front();
         }
     }
     popularLista(acoes);
@@ -157,7 +194,7 @@ int main (int argc, char *argv[]) {
 
     acoes.clear();
 
-    list<int> numeros1,numeros2;
+    list<int> numeros1, numeros2;
     for (int i = 0; i < 10; i++)
     {
         numeros1.push_front(i);
@@ -168,11 +205,11 @@ int main (int argc, char *argv[]) {
     int size = numeros1.size();
     log(to_string(size) + "\n");
 
-    //Struct
+    // Struct
     aluno a1;
     a1.idade = 23;
     a1.materia = "Sistemas de Informação";
-    a1.nome = "Ricardo Andrade";    
+    a1.nome = "Ricardo Andrade";
 
     log("Aluno: " + a1.nome + " Materia: " + a1.materia + "\n");
     a1.falar("Olá");
@@ -182,8 +219,7 @@ int main (int argc, char *argv[]) {
     aluno a2;
     a2.idade = 21;
     a2.materia = "Estetica";
-    a2.nome = "Ana Beatriz";    
-
+    a2.nome = "Ana Beatriz";
 
     alunos[0] = a1;
     alunos[1] = a2;
@@ -192,21 +228,29 @@ int main (int argc, char *argv[]) {
     {
         alunos[i].falar("Olá meu nome é: " + alunos[i].nome + "\n");
     }
-    
-    //Ponteios
+
+    // Ponteios
 
     int *point;
     int valor = 187;
 
     point = &valor;
 
-    cout << "\n" << point << "\n" << &valor;
-    cout << "\n" << *point << "\n" << valor;
+    cout << "\n"
+         << point << "\n"
+         << &valor;
+    cout << "\n"
+         << *point << "\n"
+         << valor;
 
     *point = 195;
 
-    cout << "\n" << point << "\n" << &valor;
-    cout << "\n" << *point << "\n" << valor;
+    cout << "\n"
+         << point << "\n"
+         << &valor;
+    cout << "\n"
+         << *point << "\n"
+         << valor;
 
     int *ponteiro;
     int vetor[10];
@@ -214,11 +258,13 @@ int main (int argc, char *argv[]) {
     // ponteiro = vetor; ou ponteiro = &vetor[0];
     ponteiro = vetor;
 
-    cout << "\n" << ponteiro << "\n";
+    cout << "\n"
+         << ponteiro << "\n";
 
     *(ponteiro++);
 
-    cout << "\n" << ponteiro << "\n";
+    cout << "\n"
+         << ponteiro << "\n";
 
     ponteiro = vetor;
 
@@ -228,7 +274,84 @@ int main (int argc, char *argv[]) {
         cout << vetor[i] << "\n";
         *(ponteiro++);
     }
-    
-    //Fim
+
+    float valorPoint = 0;
+    somar(&valorPoint, 27);
+
+    cout << valorPoint << "\n";
+
+    float vetorPoint[5];
+
+    iniVetor(vetorPoint);
+    printVetor(vetorPoint);
+
+    // Alocacao Dinamica de Memoria
+    char nome[50];
+    cin >> nome; // Se digitar Ricardo Andrade pega somente o Ricardo
+    cout << nome << "\n";
+    // gets(nome); // No windows iria funcionar para pegar Ricardo Andrade por conta que ele tem esa funcao gets
+
+    // malloc
+    char *pointName;
+
+    cout << "\n"
+         << sizeof(char) << "\n";
+
+    pointName = (char *)malloc(sizeof(char));
+
+    cin >> pointName;
+
+    cout << pointName << "\n";
+
+    cout << sizeof(nome) << "\n";
+    cout << sizeof(pointName) << "\n";
+    // Fim
+    int variavel = 123;
+    char nome1[25];
+    printf("Valor da variavel: %d\n", variavel);
+    printf("Digite seu nome: ");
+    scanf("%s", &nome1);
+
+    printf("Seu nome é: %s\n", nome1);
+    /*
+    d,1 - inteir
+    x,X - Hexadeciaml
+    u - int sem sinal
+    s - string, char
+    f - double
+    p - ponteiros
+    */
+
+    vector<int> v;
+
+    int tam, i;
+
+    v.push_back(10);
+    v.push_back(6);
+    v.push_back(2);
+
+    tam = v.size();
+
+    cout << tam << endl;
+
+    for (i = 0; i < tam; i++)
+    {
+        cout << v[i] << endl;
+    }
+    vector<int> v2;
+
+    v2.push_back(9);
+    v2.push_back(5);
+    v2.push_back(1);
+
+    v.swap(v2);
+    for (i = 0; i < tam; i++)
+    {
+        cout << v[i] << endl;
+    }
+    // vecto.front() ou vector.back() pegar o primeiro e o ultimo valo
+    // vecto.at(tamanho/2) pegar o valo do meio
+    // vector.insert(vector.begin(), 999 -  insere 999 no comeco | se colocar + 1 na frente do begin ele colocar na posicao 2 | vector.end() insere no final, ou - 1 pra ser na penultima e assim por diante)
+    // vector.erase(posicao)
     return 0;
 }
